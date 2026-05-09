@@ -6,10 +6,71 @@
 
     <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
     <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    
+    <!--esta linea permite que el navegador pueda interpretar JSX-->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <!--<script type="text/javascript">-->
 
-    <script type="text/javascript">
+    <!--tmbn se cambia porque ya no se js, sino JFX-->
+    <script type="text/babel">
       const app = document.getElementById('app');
+
+      //los componenetes de react SIEMPRE DEBERIAN declararse con mayus
+      const otrosHeroes = ["Flash", "Linterna verde", "Bluebeetle", "Nightwing"]
+      const OtroHeroe = (props) =>{
+        //cuando retornas un elemento en una sola linea n es necsario usar  ()
+        return <li>{ props.nombre } </li>
+      }
+
+      //componenene de react que declara JSX , que es lo que se entiende como html
+      //dentro de js
+
+      function Header(){
+        return(
+            <>
+              <header>
+                <h1>Mis superheroes favoritos</h1>
+              </header>
+            </>
+            )
+      }
+      //los props son la forma en la que se envia informacion a los componentes
+      const Article = (props) =>{
+        return(
+          
+          <article>
+              <h2>{ props.titulo }</h2>
+              <p>{ props.parrafo}</p>  
+          </article>
+        
+        )
+      }
+      //el <Header /> es la forma de llamar a un componente dentro de otro componente
+      //se hace lo mismo con ela rticle, si veo que una parte de codigo serepite varias veces
+      //puedo convertirlo en un componeente asi como se hizo con el article
       
+      //la funcion map itera sobre el arreglo,y devuelve un nuevo arreglo
+      function Pagina() {
+        return(
+          <>
+            <Header />
+            <main>
+              <p>Bienvenido!</p>
+              <Article titulo = "Batman" parrafo = "Batman no tiene superpoderes, solo tiene plata" />
+              <Article titulo = "Superman" parrafo = "Superman viene de Krypton" />
+              <Article titulo = "Aquaman" parrafo = "El superpoder de aquaman es hablar con peces" />
+              <h2>Otros heroes conocidos: </h2>
+              <ul>
+                {otrosHeroes.map((n) => <OtroHeroe nombre={n} key={n} />)}           
+               </ul>  
+            </main>
+          </>
+        )
+
+      }
+      //de esta forma se le dice a la aplicaicon que debe renderizar este componente
+      //se debe especificar que componenete se va a renderizar
+      ReactDOM.render(<Pagina />, app)
     </script>
     
   </body>
